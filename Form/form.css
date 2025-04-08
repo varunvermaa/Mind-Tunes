@@ -1,0 +1,612 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Updated colors to calm green palette */
+  --primary-color: #4CAF50;
+  --secondary-color: #2E7D32;
+  --dark-bg: #1A2E1A;
+  --light-text: #FFFFFF;
+  --accent-color: #8BC34A;
+  --success-color: #66BB6A;
+  --error-color: #F44336;
+  --gradient-start: #4CAF50;
+  --gradient-end: #2E7D32;
+  --card-bg: rgba(255, 255, 255, 0.1);
+  --input-bg: rgba(255, 255, 255, 0.9);
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  font-family: 'Poppins', sans-serif;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  background-color: var(--dark-bg);
+  color: var(--light-text);
+  line-height: 1.6;
+}
+
+/* Video Background - Enhanced for better video display */
+.video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.video-background video {
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Updated gradient to green tones */
+  background: linear-gradient(135deg, rgba(26, 46, 26, 0.7), rgba(36, 83, 42, 0.65));
+  z-index: -1;
+}
+
+/* Container - Wider at 80% */
+.container {
+  width: 80%;
+  min-height: 100vh;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  margin: 0 auto;
+}
+
+/* Main Heading with Animation */
+.main-heading {
+  text-align: center;
+  font-weight: 700;
+  font-size: 2.5rem;
+  color: var(--light-text);
+  margin-bottom: 30px;
+  position: relative;
+  display: inline-block;
+  padding: 0 15px;
+  animation: fadeInDown 1s ease-out;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Added for better readability */
+}
+
+.main-heading::after {
+  content: '';
+  position: absolute;
+  width: 80%;
+  height: 4px;
+  /* Updated gradient to match new color scheme */
+  background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+  bottom: -10px;
+  left: 10%;
+  border-radius: 2px;
+}
+
+/* Section Subheadings */
+h3 {
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.9rem;
+  color: var(--light-text);
+  margin: 15px 0;
+  position: relative;
+  padding-bottom: 10px;
+  animation: fadeIn 0.8s ease-out;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* Added for better readability */
+}
+
+h3::after {
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 3px;
+  background: var(--accent-color);
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+/* Form Container - Adjusted to be wider */
+form {
+  width: 100%;
+  background: var(--card-bg);
+  padding: 30px;
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  animation: fadeInUp 0.8s ease-out;
+  /* Added subtle glow effect */
+  box-shadow: 0 8px 32px rgba(76, 175, 80, 0.2);
+}
+
+/* Section Divider */
+.section-divider {
+  margin: 25px 0;
+  border: none;
+  height: 2px;
+  /* Updated gradient to match new color scheme */
+  background: linear-gradient(90deg, transparent, rgba(139, 195, 74, 0.5), transparent);
+  border-radius: 50px;
+}
+
+/* Labels - Removed hover effect */
+label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 500;
+  margin-top: 20px;
+  color: var(--light-text);
+  font-size: 20px;
+  /* Added slight letter spacing for better readability */
+  letter-spacing: 0.3px;
+}
+
+/* Input Fields, Selects, Textareas */
+input, select, textarea {
+  width: 100%;
+  padding: 12px 15px;
+  margin-top: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  font-size: 16px;
+  background: var(--input-bg);
+  color: var(--dark-bg);
+  font-family: 'Poppins', sans-serif;
+  transition: var(--transition);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Checkboxes */
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  position: relative;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+input[type="checkbox"]:checked {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+input[type="checkbox"]:checked::after {
+  content: "✓";
+  position: absolute;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+input[type="checkbox"]:hover {
+  transform: scale(1.1);
+  border-color: var(--primary-color);
+}
+
+/* Text Inputs for "Other" */
+input[type="text"] {
+  margin-left: 15px;
+  padding: 10px 15px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  transition: var(--transition);
+  flex-grow: 1;
+}
+
+/* Button Container */
+.button-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 30px;
+}
+
+/* Submit Button - Updated to be rectangular with 8px rounded corners */
+button {
+  width: 220px;
+  padding: 14px 20px;
+  /* Updated gradient to match new color scheme */
+  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+  color: white;
+  border: none;
+  border-radius: 8px; /* Changed from 50px to 8px as requested */
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 600;
+  transition: var(--transition);
+  text-align: center;
+  /* Updated box shadow to match new color scheme */
+  box-shadow: 0 6px 15px rgba(76, 175, 80, 0.4);
+  position: relative;
+  overflow: hidden;
+  /* Added text shadow for better contrast */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  /* Added letter spacing for better readability */
+  letter-spacing: 0.5px;
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transform: translateX(-100%);
+}
+
+button:hover {
+  transform: translateY(-3px);
+  /* Updated box shadow to match new color scheme */
+  box-shadow: 0 8px 20px rgba(76, 175, 80, 0.6);
+}
+
+button:hover::before {
+  animation: shine 1.5s infinite;
+}
+
+button:active {
+  transform: translateY(2px);
+  /* Updated box shadow to match new color scheme */
+  box-shadow: 0 3px 10px rgba(76, 175, 80, 0.4);
+}
+
+/* Dialog box */
+.dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  width: 320px;
+  max-width: 90%;
+  padding: 30px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.dialog.visible {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+
+.dialog.hidden {
+  display: none;
+}
+
+.dialog p {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.dialog.success {
+  border-top: 5px solid var(--success-color);
+}
+
+.dialog.success p {
+  color: var(--success-color);
+}
+
+.dialog.error {
+  border-top: 5px solid var(--error-color);
+}
+
+.dialog.error p {
+  color: var(--error-color);
+}
+
+.dialog-button {
+  padding: 10px 20px;
+  background: var(--dark-bg);
+  color: white;
+  border: none;
+  border-radius: 8px; /* Updated to match main button */
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: var(--transition);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dialog-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .container {
+    width: 90%;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 95%;
+  }
+  
+  form {
+    padding: 20px;
+  }
+  
+  .main-heading {
+    font-size: 1.9rem;
+  }
+  
+  h3 {
+    font-size: 1.9rem;
+  }
+  
+  button {
+    width: 100%;
+  }
+}
+
+/* Focus indicators for accessibility */
+*:focus-visible {
+  outline: 3px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+/* Field group styling for related inputs */
+.field-group {
+  margin: 15px 0;
+  padding: 15px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  /* Added subtle border for better visual separation */
+  border: 1px solid rgba(139, 195, 74, 0.1);
+}
+
+/* Helper text styling */
+.helper-text {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 5px;
+  font-style: italic;
+}
+
+/* Required field indicator */
+.required::after {
+  content: '*';
+  color: var(--accent-color);
+  margin-left: 4px;
+}
+
+/* Radio button styling */
+input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 24px;
+  height: 24px;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  position: relative;
+  cursor: pointer;
+  transition: var(--transition);
+  margin: 0 auto;
+  display: block;
+}
+
+input[type="radio"]:checked {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+input[type="radio"]:checked::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+input[type="radio"]:hover {
+  transform: scale(1.1);
+  border-color: var(--primary-color);
+}
+
+input, select, textarea {
+  background: var(--input-bg);
+  opacity: 0.95; /* Slightly transparent inputs */
+}
+
+/* Table styling for radio buttons */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 15px 0;
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  /* Added subtle border */
+  border: 1px solid rgba(139, 195, 74, 0.1);
+}
+
+table th, table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+table th {
+  background: rgba(255, 255, 255, 0.1);
+  font-weight: 500;
+  color: var(--light-text);
+  /* Added text shadow for better readability */
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+table td:first-child {
+  text-align: left;
+  min-width: 150px;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+/* Equal spacing for options */
+th, td {
+  width: calc((100% - 150px) / 4); /* For tables with 4 options (after the label column) */
+}
+
+table tr:last-child td {
+  border-bottom: none;
+}
+
+/* For tables with 5 options */
+table.five-options th, table.five-options td {
+  width: calc((100% - 150px) / 5);
+}
+
+/* Add hover effect to table rows */
+table tr:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Table responsive */
+@media (max-width: 768px) {
+  table {
+    font-size: 16px;
+  }
+  
+  table td:first-child {
+    min-width: 100px;
+  }
+  
+  input[type="radio"] {
+    width: 20px;
+    height: 20px;
+  }
+  
+  input[type="radio"]:checked::after {
+    width: 8px;
+    height: 8px;
+  }
+  
+  table th, table td {
+    padding: 10px 5px;
+  }
+}
+
+/* Added smooth scrolling behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Added subtle animation to form elements for better UX */
+form label, form input, form select, form textarea, form button {
+  animation: fadeIn 0.5s ease-out;
+  animation-fill-mode: both;
+}
+
+/* Added subtle shadow to inputs for better depth */
+input, select, textarea {
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Enhanced visual feedback for form interactions */
+input:hover, select:hover, textarea:hover {
+  border-color: rgba(139, 195, 74, 0.5);
+}

@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/bookingpage.css" />
+    <style>
+      /* Calm, serene theme with green accents */
+      :root {
+        --primary-color: #4CAF50;
+        --primary-light: #7BC67E;
+        --primary-dark: #3B8A3E;
+        --accent-color: #8BC34A;
+        --text-dark: #333333;
+        --text-medium: #555555;
+        --text-light: #777777;
+        --bg-color: #F5F9F6;
+        --card-bg: #FFFFFF;
+        --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        --sidebar-width: 250px;
+        --sidebar-width-collapsed: 70px;
+        --transition-speed: 0.3s;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: var(--bg-color);
+        font-family: 'Poppins', sans-serif;
+        color: var(--text-dark);
+        overflow-x: hidden;
+      }
+
+      /* Typography */
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: 600;
+        color: var(--text-dark);
+      }
+
+      h1 { font-size: 2.25rem; }
+      h2 { font-size: 2rem; }
+      h3 { font-size: 1.75rem; }
+      h4 { font-size: 1.5rem; }
+      h5 { font-size: 1.25rem; }
+      h6 { font-size: 1rem; }
+
+      p {
+        color: var(--text-medium);
+        font-weight: 400;
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+
+      .small-text {
+        font-size: 0.85rem;
+        color: var(--text-light);
+      }
+
+      /* Layout */
+      .wrapper {
+        display: flex;
+        min-height: 100vh;
+        position: relative;
+      }
+
+      /* Sidebar styles */
+      #sidebar {
+        width: var(--sidebar-width);
+        background-color: var(--card-bg);
+        position: fixed;
+        height: 100vh;
+        z-index: 999;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+        transition: width var(--transition-speed) ease;
+        overflow-x: hidden;
+      }
+
+      #sidebar.collapsed {
+        width: var(--sidebar-width-collapsed);
+      }
+
+      .sidebar-header {
+        padding: 1.5rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+      }
+
+      .sidebar-logo {
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: var(--primary-color);
+        text-decoration: none;
+        transition: color var(--transition-speed) ease;
+      }
+
+      .sidebar-logo:hover {
+        color: var(--primary-dark);
+      }
+
+      #toggle-btn {
+        background: transparent;
+        border: none;
+        color: var(--text-medium);
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: color var(--transition-speed) ease;
+      }
+
+      #toggle-btn:hover {
+        color: var(--primary-color);
+      }
+
+      .sidebar-nav {
+        padding: 1rem 0;
+        list-style: none;
+      }
+
+      .sidebar-item {
+        margin-bottom: 0.5rem;
+      }
+      .sidebar-dropdown .sidebar-link {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        position: relative; 
+      }
+      .sidebar-dropdown .bullet {
+        position: absolute; /* Position the bullet absolutely */
+        left: -20px; /* Move it further left */
+        font-size: 1 rem;
+        line-height: 1;
+      }
+
+      .sidebar-link {
+        display: flex;
+        align-items: center;
+        padding: 0.75rem 1.5rem;
+        color: var(--text-medium);
+        text-decoration: none;
+        transition: all var(--transition-speed) ease;
+        border-radius: 0 8px 8px 0;
+        position: relative;
+      }
+
+      .sidebar-link i {
+        margin-right: 1rem;
+        font-size: 1.1rem;
+      }
+
+      .sidebar-link:hover, 
+      .sidebar-link.active {
+        color: var(--primary-color);
+        background-color: rgba(76, 175, 80, 0.08);
+      }
+
+      .sidebar-dropdown {
+        padding-left: 2rem;
+        display: none;
+      }
+
+      .sidebar-dropdown.show {
+        display: block;
+      }
+
+      .sidebar-dropdown .sidebar-link {
+        padding: 0.5rem 1rem;
+        font-size: 3 rem;
+      }
+
+      .sidebar-footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: 1rem;
+        border-top: 1px solid rgba(0,0,0,0.05);
+      }
+
+      /* MAIN CONTENT */
+      .main {
+        flex: 1;
+        margin-left: var(--sidebar-width);
+        padding-top: 60px; /* Height of navbar */
+        transition: margin-left var(--transition-speed) ease;
+      }
+
+      .content {
+        padding: 2rem;
+      }
+
+      /* COURSE CARDS */
+      .course-card {
+        background: var(--card-bg);
+        border-radius: 8px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        margin-bottom: 2rem;
+        height: 100%;
+      }
+
+      .course-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .course-img {
+        height: 200px;
+        object-fit: cover;
+        width: 100%;
+        border-radius: 8px 8px 0 0;
+      }
+
+      .course-info {
+        padding: 1.5rem;
+      }
+
+      .course-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: var(--primary-dark);
+      }
+
+      .course-description {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        height: 60px;
+        overflow: hidden;
+      }
+
+      .course-rating {
+        color: #ffc107;
+        font-weight: 500;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+      }
+
+      .course-price {
+        font-weight: 600;
+        color: var(--primary-color);
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+      }
+
+      .btn-buy {
+        background: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 0.5rem 1.5rem;
+        border-radius: 8px;
+        font-weight: 500;
+        transition: all 0.3s;
+        width: 100%;
+      }
+
+      .btn-buy:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      /* SECTION HEADERS */
+      .section-header {
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--accent-color);
+      }
+
+      .section-title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: var(--primary-dark);
+      }
+
+      .section-subtitle {
+        font-size: 1rem;
+        color: var(--text-secondary);
+        margin-top: 0.5rem;
+      }
+
+      /* FILTER OPTIONS */
+      .filter-container {
+        margin-bottom: 2rem;
+      }
+
+      .filter-btn {
+        background: var(--card-bg);
+        border: 1px solid var(--accent-color);
+        color: var(--primary-color);
+        border-radius: 8px;
+        padding: 0.5rem 1.5rem;
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+        transition: all 0.3s;
+        font-weight: 500;
+      }
+
+      .filter-btn.active, .filter-btn:hover {
+        background: var(--primary-color);
+        color: white;
+      }
+
+      /* ANIMATIONS */
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      .fade-in {
+        animation: fadeIn 0.8s ease-out;
+      }
+
+      @keyframes slideInLeft {
+        from { opacity: 0; transform: translateX(-20px); }
+        to { opacity: 1; transform: translateX(0); }
+      }
+
+      .slide-in-left {
+        animation: slideInLeft 0.8s ease-out;
+      }
+
+      @keyframes slideInRight {
+        from { opacity: 0; transform: translateX(20px); }
+        to { opacity: 1; transform: translateX(0); }
+      }
+
+      .slide-in-right {
+        animation: slideInRight 0.8s ease-out;
+      }
+
+      /* RESPONSIVE DESIGN */
+      @media (max-width: 992px) {
+        #sidebar {
+          width: var(--sidebar-width-collapsed);
+        }
+        
+        #sidebar .sidebar-link span {
+          display: none;
+        }
+        
+        .main {
+          margin-left: var(--sidebar-width-collapsed);
+        }
+        
+        .sidebar-link i {
+          margin-right: 0;
+          font-size: 1.5rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .navbar {
+          padding: 0.5rem 1rem;
+        }
+        
+        .navbar-brand {
+          font-size: 1.2rem;
+          left: 1rem;
+        }
+        
+        .content {
+          padding: 1rem;
+        }
+        
+        .section-title {
+          font-size: 1.5rem;
+        }
+        
+        .course-description {
+          height: auto;
+        }
+        
+        .filter-container {
+          flex-wrap: wrap;
+        }
+      }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+    <title>MindTunes | CBT Therapy Courses</title>
+  </head>
+
+  <body>
+    
+
+    <!-- Rest of the content remains the same -->
+    <div class="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar">
+        <div class="sidebar-header">
+          <a href="#" class="sidebar-logo">MindTunes</a>
+          <button id="toggle-btn" type="button">
+          </button>
+        </div>
+        
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="#" class="sidebar-link" data-bs-toggle="collapse" data-bs-target="#homeSubmenu" aria-expanded="false">
+              <i class="bi bi-house-door-fill me-2"></i>
+              <span>Home</span>
+              <i class="bi bi-chevron-down"></i>
+            </a>
+            <ul id="homeSubmenu" class="sidebar-dropdown collapse">
+              <li><a href="/Onboarding/onboarding.html" class="sidebar-link">Dashboard</a></li>
+              <li><a href="/bookingPage/bookingPage.html" class="sidebar-link">Our Courses</a></li>
+              <li><a href="/schedulePage/schedulepage.html" class="sidebar-link">Appointment</a></li>
+            </ul>
+          </li>
+          
+          
+      </aside>
+
+      <!-- Main Content -->
+      <div class="main">
+        <main class="content py-4 fade-in">
+          <div class="container-fluid">
+            <!-- Section Header -->
+            <div class="section-header d-flex justify-content-between align-items-center slide-in-left">
+              <div>
+                <h2 class="section-title">CBT Therapy Courses</h2>
+                <p class="section-subtitle">Personalized courses based on your assessment results</p>
+              </div>
+              
+              <!-- Filter Options -->
+              <div class="filter-container slide-in-right">
+                <!-- <button class="filter-btn active">All Courses</button>
+                <button class="filter-btn">Anxiety</button>
+                <button class="filter-btn">Depression</button>
+                <button class="filter-btn">Stress</button> -->
+              </div>
+            </div>
+            
+            <!-- Course Cards - Same as before -->
+            <div class="row g-4">
+              <!-- Course 1 -->
+              <div class="col-lg-4 col-md-6 slide-in-left" style="animation-delay: 0.1s;">
+                <div class="course-card">
+                  <img src="/img/priscilla-du-preez-AW1vLlH39Ww-unsplash.jpg" class="course-img" alt="Anxiety Management with CBT">
+                  <div class="course-info">
+                    <h3 class="course-title">Anxiety Management with CBT</h3>
+                    <p class="course-description">Learn evidence-based techniques to identify, challenge, and replace anxious thought patterns using music therapy.</p>
+                    <div class="course-rating">
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-half"></i>
+                      <span class="ms-1">4.5 (120 reviews)</span>
+                    </div>
+                    <p class="course-price">₹7500</p>
+                    <a href="/Payment/index.html?course=Anxiety%20Management&amount=7500" target="_blank">
+                      <button class="btn-buy">
+                        <i class="bi bi-cart-plus me-2"></i>Enroll Now
+                      </button>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Course 2 -->
+              <div class="col-lg-4 col-md-6 slide-in-left" style="animation-delay: 0.2s;">
+                <div class="course-card">
+                  <img src="/img/soundtrap-5Wj_tk8_Ens-unsplash.jpg" class="course-img" alt="Depression Recovery">
+                  <div class="course-info">
+                    <h3 class="course-title">Depression Recovery Program</h3>
+                    <p class="course-description">Overcome negative thinking patterns and build emotional resilience through structured audio exercises and mood-enhancing techniques.</p>
+                    <div class="course-rating">
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star"></i>
+                      <span class="ms-1">4.0 (85 reviews)</span>
+                    </div>
+                    <p class="course-price">₹9000</p>
+                    <a href="/Payment/index.html?course=Depression%20Recovery&amount=9000" target="_blank">
+                      <button class="btn-buy">
+                        <i class="bi bi-cart-plus me-2"></i>Enroll Now
+                      </button>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Course 3 -->
+              <div class="col-lg-4 col-md-6 slide-in-left" style="animation-delay: 0.3s;">
+                <div class="course-card">
+                  <img src="/img/priscilla-du-preez-AW1vLlH39Ww-unsplash.jpg" class="course-img" alt="Mindful Sound Therapy">
+                  <div class="course-info">
+                    <h3 class="course-title">Mindful Sound Therapy</h3>
+                    <p class="course-description">Combine mindfulness practices with therapeutic sounds to reduce stress, improve focus, and build present-moment awareness.</p>
+                    <div class="course-rating">
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-half"></i>
+                      <span class="ms-1">4.7 (92 reviews)</span>
+                    </div>
+                    <p class="course-price">₹7000</p>
+                    <a href="/Payment/index.html?course=Mindful%20Sound%20Therapy&amount=7000" target="_blank">
+                      <button class="btn-buy">
+                        <i class="bi bi-cart-plus me-2"></i>Enroll Now
+                      </button>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Course 4 -->
+              <div class="col-lg-4 col-md-6 slide-in-left" style="animation-delay: 0.4s;">
+                <div class="course-card">
+                  <img src="/img/soundtrap-5Wj_tk8_Ens-unsplash.jpg" class="course-img" alt="Insomnia & Sleep Improvement">
+                  <div class="course-info">
+                    <h3 class="course-title">Insomnia & Sleep Improvement</h3>
+                    <p class="course-description">Learn CBT techniques combined with specialized sleep music therapy to address chronic sleep problems and establish healthy sleep patterns.</p>
+                    <div class="course-rating">
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star"></i>
+                      <span class="ms-1">4.2 (78 reviews)</span>
+                    </div>
+                    <p class="course-price">₹8200</p>
+                    <a href="/Payment/index.html?course=Insomnia%20Improvement&amount=8200" target="_blank">
+                      <button class="btn-buy">
+                        <i class="bi bi-cart-plus me-2"></i>Enroll Now
+                      </button>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Course 5 -->
+              <div class="col-lg-4 col-md-6 slide-in-left" style="animation-delay: 0.5s;">
+                <div class="course-card">
+                  <img src="/img/priscilla-du-preez-AW1vLlH39Ww-unsplash.jpg" class="course-img" alt="Trauma Recovery">
+                  <div class="course-info">
+                    <h3 class="course-title">Trauma Recovery & Resilience</h3>
+                    <p class="course-description">Process difficult emotions and experiences through guided trauma-informed music therapy, building safety and resilience.</p>
+                    <div class="course-rating">
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-half"></i>
+                      <span class="ms-1">4.8 (105 reviews)</span>
+                    </div>
+                    <p class="course-price">₹11000</p>
+                    <a href="/Payment/index.html?course=Trauma%20Recovery&amount=11000" target="_blank">
+                      <button class="btn-buy">
+                        <i class="bi bi-cart-plus me-2"></i>Enroll Now
+                      </button>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Course 6 -->
+              <div class="col-lg-4 col-md-6 slide-in-left" style="animation-delay: 0.6s;">
+                <div class="course-card">
+                  <img src="/img/soundtrap-5Wj_tk8_Ens-unsplash.jpg" class="course-img" alt="Self-Esteem Builder">
+                  <div class="course-info">
+                    <h3 class="course-title">Self-Esteem Builder</h3>
+                    <p class="course-description">Transform negative self-talk and build a positive self-image through cognitive restructuring and expressive music therapy techniques.</p>
+                    <div class="course-rating">
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star"></i>
+                      <span class="ms-1">4.3 (63 reviews)</span>
+                    </div>
+                    <p class="course-price">₹7800</p>
+                    <a href="/Payment/index.html?course=Self-Esteem%20Builder&amount=7800" target="_blank">
+                      <button class="btn-buy">
+                        <i class="bi bi-cart-plus me-2"></i>Enroll Now
+                      </button>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Add active class to current page in sidebar
+        const sidebarLinks = document.querySelectorAll('.sidebar-link');
+        sidebarLinks.forEach(link => {
+          if (link.getAttribute('href') === window.location.pathname) {
+            link.classList.add('active');
+          }
+        });
+        
+        // Make dropdown items be collapsed by default
+        const dropdownMenus = document.querySelectorAll('.sidebar-dropdown.collapse');
+        dropdownMenus.forEach(menu => {
+          // Remove 'show' class to ensure it's collapsed by default
+          menu.classList.remove('show');
+        });
+        
+        const dropdownLinks = document.querySelectorAll('.sidebar-link.has-dropdown');
+        dropdownLinks.forEach(link => {
+          // Set aria-expanded to false to indicate it's collapsed
+          link.setAttribute('aria-expanded', 'false');
+        });
+        
+        // Filter buttons functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        filterBtns.forEach(btn => {
+          btn.addEventListener('click', function() {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            
+            // In a real implementation, this would filter the courses
+            // For now, just a visual effect
+            const courseCards = document.querySelectorAll('.course-card');
+            courseCards.forEach(card => {
+              card.style.opacity = '0.7';
+              setTimeout(() => {
+                card.style.opacity = '1';
+              }, 300);
+            });
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

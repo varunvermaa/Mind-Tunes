@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mind Tunes Test Form</title>
+    <link rel="stylesheet" href="form.css">
+</head> 
+<body>
+
+    <div class="video-background">
+        <video autoplay muted loop>
+          <source src="vid\form.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+      </div>
+    <div class="container">
+        <h1 class="main-heading">Content Consumption on Social Media and Real-Life Performance</h1>
+        <h3 class="sub-heading">Questionnaire</h3>
+        <form action="#" method="post">
+            
+            <!-- Section 1 -->
+            <h3>Section 1: Social Media Usage</h3>
+            <label>1. On an average, how many hours per day do you spend on social media?</label>
+            <select name="hours_per_day">
+                <option>Less than 1 hour</option>
+                <option>1–2 hours</option>
+                <option>2–4 hours</option>
+                <option>4–6 hours</option>
+                <option>More than 6 hours</option>
+            </select>
+            
+            <div class="section-divider"></div>
+
+            <label>2. Which types of content do you primarily consume on social media? (Select all that apply)</label>
+            <label>News and current events
+                <input type="checkbox" name="content" value="News">
+            </label>
+            <label>Entertainment
+                <input type="checkbox" name="content" value="Entertainment">
+            </label>
+            <label>Lifestyle
+                <input type="checkbox" name="content" value="Lifestyle">
+            </label>
+            <label>Educational content
+                <input type="checkbox" name="content" value="Educational">
+            </label>
+            <label>Social interactions
+                <input type="checkbox" name="content" value="Social">
+            </label>
+            <label>Learning Spirituality
+                <input type="checkbox" name="content" value="Spirituality">
+            </label>
+            <label>Other:
+                <input type="text" name="content_other" placeholder="Specify here">
+            </label>
+            
+            <div class="section-divider"></div>            
+
+            <label>3. Which Social Media do you like to use?</label>
+            <label>WhatsApp
+                <input type="checkbox" name="platform" value="WhatsApp">
+            </label>
+            <label>Facebook
+                <input type="checkbox" name="platform" value="Facebook">
+            </label>
+            <label>Instagram
+                <input type="checkbox" name="platform" value="Instagram">
+            </label>
+
+            <label>Web Search
+                <input type="checkbox" name="platform" value="LinkedIn">
+            </label>
+            <label>Online Purchasing
+                <input type="checkbox" name="platform" value="Twitter">
+            </label>
+            <label>YouTube
+                <input type="checkbox" name="platform" value="YouTube">
+            </label>
+            <label>Twitter
+                <input type="checkbox" name="platform" value="Twitter">
+            </label>
+            <label>Other:
+                <input type="text" name="platform_other" placeholder="Specify here">
+            </label>
+            
+            <div class="section-divider"></div>
+
+            <label>4. How often do you check social media during the following times?</label>
+            <table>
+                <tr>
+                    <th></th>
+                    <th>Rarely</th>
+                    <th>Sometimes</th>
+                    <th>Often</th>
+                    <th>Never</th>
+                </tr>
+                <tr>
+                    <td>Morning:</td>
+                    <td><input type="radio" name="morning" value="Rarely"></td>
+                    <td><input type="radio" name="morning" value="Sometimes"></td>
+                    <td><input type="radio" name="morning" value="Often"></td>
+                    <td><input type="radio" name="morning" value="Never"></td>
+                </tr>
+                <tr>
+                    <td>Afternoon:</td>
+                    <td><input type="radio" name="afternoon" value="Rarely"></td>
+                    <td><input type="radio" name="afternoon" value="Sometimes"></td>
+                    <td><input type="radio" name="afternoon" value="Often"></td>
+                    <td><input type="radio" name="afternoon" value="Never"></td>
+                </tr>
+                <tr>
+                    <td>Evening:</td>
+                    <td><input type="radio" name="evening" value="Rarely"></td>
+                    <td><input type="radio" name="evening" value="Sometimes"></td>
+                    <td><input type="radio" name="evening" value="Often"></td>
+                    <td><input type="radio" name="evening" value="Never"></td>
+                </tr>
+                <tr>
+                    <td>Before bed:</td>
+                    <td><input type="radio" name="before_bed" value="Rarely"></td>
+                    <td><input type="radio" name="before_bed" value="Sometimes"></td>
+                    <td><input type="radio" name="before_bed" value="Often"></td>
+                    <td><input type="radio" name="before_bed" value="Never"></td>
+                </tr>
+                <tr>
+                    <td>Just After getting up in the morning:</td>
+                    <td><input type="radio" name="just_after_waking" value="Rarely"></td>
+                    <td><input type="radio" name="just_after_waking" value="Sometimes"></td>
+                    <td><input type="radio" name="just_after_waking" value="Often"></td>
+                    <td><input type="radio" name="just_after_waking" value="Never"></td>
+                </tr>
+            </table>
+
+            <div class="section-divider"></div>
+
+            <!-- Section 2 -->
+            <h3>Section 2: Attention and Focus</h3>
+            <label>1. How often do you find it difficult to focus on tasks after using social media?</label>
+            <select name="focus">
+                <option>Never</option>
+                <option>Rarely</option>
+                <option>Sometimes</option>
+                <option>Often</option>
+                <option>Always</option>
+            </select>
+            
+            <div class="section-divider"></div>
+
+            <label>2. Do you feel that social media distracts you from completing important tasks?</label>
+            <select name="focus">
+                <option>Strongly Disagree</option>
+                <option>Disagree</option>
+                <option>Neutral</option>
+                <option>Agree</option>
+                <option>Strongly Agree</option>
+            </select>
+
+            <div class="section-divider"></div>
+
+            <label>3. How often do you switch to social media while doing tasks (e.g., studying or work)?</label>
+            <select name="focus">
+                <option>Never</option>
+                <option>Rarely</option>
+                <option>Sometimes</option>
+                <option>Often</option>
+                <option>Always</option>
+            </select>
+
+            <div class="section-divider"></div>
+
+            <!-- Section 3 -->
+            <h3>Section 3: Sleep Quality</h3>
+            <label>1. How often do you use social media right before going to bed?</label>
+            <select name="sleep_before">
+                <option>Never</option>
+                <option>Rarely</option>
+                <option>Sometimes</option>
+                <option>Often</option>
+                <option>Always</option>
+            </select>
+            
+            <div class="section-divider"></div>
+
+            <label>2. Do you feel that your social media usage affects the quality of your sleep?</label>
+            <select name="focus">
+                <option>Strongly Disagree</option>
+                <option>Disagree</option>
+                <option>Neutral</option>
+                <option>Agree</option>
+                <option>Strongly Agree</option>
+            </select>
+
+            <div class="section-divider"></div>
+
+            <label>3. On average, how many hours of sleep do you get on a typical night?</label>
+            <select name="sleep_hours">
+                <option>Less than 4 hours</option>
+                <option>4–5 hours</option>
+                <option>6–7 hours</option>
+                <option>8 hours or more</option>
+            </select>
+            
+            <div class="section-divider"></div>
+
+            <!-- Section 4 -->
+            <h3>Section 4: Self-Esteem and Self-Comparison</h3>
+            <label>1. How often do you compare yourself to others based on what you see on social media?</label>
+            <select name="comparison">
+                <option>Never</option>
+                <option>Rarely</option>
+                <option>Sometimes</option>
+                <option>Often</option>
+                <option>Always</option>
+            </select>
+            
+            <div class="section-divider"></div>
+
+            <label>2. Do you feel more positive or negative about yourself after using social media?</label>
+            <select name="comparison">
+                <option>Very Positive</option>
+                <option>Positive</option>
+                <option>Neutral</option>
+                <option>Negative</option>
+                <option>Very Negative</option>
+            </select>
+            
+            <div class="section-divider"></div>
+
+            <label>3. Social media makes me feel that others have better lives than I do.</label>
+            <select name="focus">
+                <option>Strongly Disagree</option>
+                <option>Disagree</option>
+                <option>Neutral</option>
+                <option>Agree</option>
+                <option>Strongly Agree</option>
+            </select>
+
+            <div class="section-divider"></div>
+
+            <!-- Section 5 -->
+            <h3>Section 5: Time Allocation</h3>
+            <label>1. How often do you feel that you could have spent your time better than being on social media?</label>
+            <select name="time_better">
+                <option>Never</option>
+                <option>Rarely</option>
+                <option>Sometimes</option>
+                <option>Often</option>
+                <option>Always</option>
+            </select>
+            
+            <div class="section-divider"></div>
+
+            <label>2. When using social media, do you feel like you are missing out on activities or responsibilities?</label>
+            <select name="focus">
+                <option>Strongly Disagree</option>
+                <option>Disagree</option>
+                <option>Neutral</option>
+                <option>Agree</option>
+                <option>Strongly Agree</option>
+            </select>
+
+            <div class="section-divider"></div>
+
+            <label>3. If you were to reduce your social media use, how would you most likely spend the extra time? (Choose all that apply)</label>
+            <label>Studying or working
+                <input type="checkbox" name="platform" value="WhatsApp">
+            </label>
+            <label>Engaging in hobbies
+                <input type="checkbox" name="platform" value="Facebook">
+            </label>
+            <label>Physical activities/exercise
+                <input type="checkbox" name="platform" value="Instagram">
+            </label>
+            <label>Socializing in person
+                <input type="checkbox" name="platform" value="YouTube">
+            </label>
+            <label>Resting or sleeping
+                <input type="checkbox" name="platform" value="Twitter">
+            </label>
+            <label>Other:
+                <input type="text" name="platform_other" placeholder="Specify here">
+            </label>
+            
+            <div class="section-divider"></div>
+
+            <!-- Section 6 -->
+            <h3>Section 6: Real-Life Performance</h3>
+            <label>1. Overall, how would you rate your recent performance in the following areas?</label>
+            
+            <table>
+                <tr>
+                    <th></th>
+                    <th>Poor</th>
+                    <th>Fair</th>
+                    <th>Good</th>
+                    <th>Very Good</th>
+                    <th>Excellent</th>
+                </tr>
+                <tr>
+                    <td>Academic/Work Performance:</td>
+                    <td><input type="radio" name="academic" value="Poor"></td>
+                    <td><input type="radio" name="academic" value="Fair"></td>
+                    <td><input type="radio" name="academic" value="Good"></td>
+                    <td><input type="radio" name="academic" value="Very Good"></td>
+                    <td><input type="radio" name="academic" value="Excellent"></td>
+                </tr>
+                <tr>
+                    <td>Physical Health (e.g., exercise, fitness):</td>
+                    <td><input type="radio" name="health" value="Poor"></td>
+                    <td><input type="radio" name="health" value="Fair"></td>
+                    <td><input type="radio" name="health" value="Good"></td>
+                    <td><input type="radio" name="health" value="Very Good"></td>
+                    <td><input type="radio" name="health" value="Excellent"></td>
+                </tr>
+                <tr>
+                    <td>Social Interactions:</td>
+                    <td><input type="radio" name="social" value="Poor"></td>
+                    <td><input type="radio" name="social" value="Fair"></td>
+                    <td><input type="radio" name="social" value="Good"></td>
+                    <td><input type="radio" name="social" value="Very Good"></td>
+                    <td><input type="radio" name="social" value="Excellent"></td>
+                </tr>
+            </table>
+            
+            <div class="section-divider"></div>
+
+            <label>2. Do you feel that social media affects your performance in the following areas?</label>
+
+<table>
+    <tr>
+        <th></th>
+        <th>Strongly Disagree</th>
+        <th>Disagree</th>
+        <th>Neutral</th>
+        <th>Agree</th>
+        <th>Strongly Agree</th>
+    </tr>
+    <tr>
+        <td>Academic/Work Performance:</td>
+        <td><input type="radio" name="academic_performance" value="Strongly Disagree"></td>
+        <td><input type="radio" name="academic_performance" value="Disagree"></td>
+        <td><input type="radio" name="academic_performance" value="Neutral"></td>
+        <td><input type="radio" name="academic_performance" value="Agree"></td>
+        <td><input type="radio" name="academic_performance" value="Strongly Agree"></td>
+    </tr>
+    <tr>
+        <td>Physical Health:</td>
+        <td><input type="radio" name="physical_health" value="Strongly Disagree"></td>
+        <td><input type="radio" name="physical_health" value="Disagree"></td>
+        <td><input type="radio" name="physical_health" value="Neutral"></td>
+        <td><input type="radio" name="physical_health" value="Agree"></td>
+        <td><input type="radio" name="physical_health" value="Strongly Agree"></td>
+    </tr>
+    <tr>
+        <td>Social Interactions:</td>
+        <td><input type="radio" name="social_interactions" value="Strongly Disagree"></td>
+        <td><input type="radio" name="social_interactions" value="Disagree"></td>
+        <td><input type="radio" name="social_interactions" value="Neutral"></td>
+        <td><input type="radio" name="social_interactions" value="Agree"></td>
+        <td><input type="radio" name="social_interactions" value="Strongly Agree"></td>
+    </tr>
+</table>
+
+
+            <div class="section-divider"></div>
+
+            <!-- Section 7 -->
+
+            <h3>Section 7: Physical Health and Activity Untitled Title</h3>
+            <label>1. How often do you engage in physical activities (e.g., sports, exercise, walking)?</label>
+            <select name="performance">
+                <option>Rarely or never</option>
+                <option>1-2 times per week</option>
+                <option>3-4 times per week</option>
+                <option>5 or more times per week</option>
+            </select>
+            
+            <div class="section-divider"></div>
+
+            <label>2. How much time do you spend on physical activities on a typical day?</label>
+            <select name="performance">
+                <option>Less than 15 minutesr</option>
+                <option>15-30 minutes</option>
+                <option>30-60 minutes</option>
+                <option>More than 1 hour</option>
+            </select>
+            
+            <div class="section-divider"></div>
+
+            <label>3. Do you feel that social media usage reduces the amount of time you spend on physical activities?</label>
+            <select name="focus">
+                <option>Strongly Disagree</option>
+                <option>Disagree</option>
+                <option>Neutral</option>
+                <option>Agree</option>
+                <option>Strongly Agree</option>
+            </select>
+
+            <div class="section-divider"></div>
+
+            <label>4. How often do you choose to stay on social media instead of being physically active (e.g., exercise, outdoor activities)?</label>
+            <select name="focus">
+                <option>Never</option>
+                <option>Rarely</option>
+                <option>Sometimes</option>
+                <option>Often</option>
+                <option>Always</option>
+            </select>
+
+            <div class="section-divider"></div>
+
+            <label>5. How would you rate your overall physical health?</label>
+            <select name="performance">
+                <option>Excellent</option>
+                <option>Good</option>
+                <option>Fair</option>                
+                <option>Poor</option>
+                
+            </select>
+            
+            <div class="section-divider"></div>
+
+            <label>6. Have you experienced any of the following due to prolonged social media use? (Select all that apply) </label>
+            <label>Neck or back pain
+                <input type="checkbox" name="platform" value="WhatsApp">
+            </label>
+            <label>Eye strain or headaches
+                <input type="checkbox" name="platform" value="Facebook">
+            </label>
+            <label>Poor posture
+                <input type="checkbox" name="platform" value="Instagram">
+            </label>
+            <label>None of the above
+                <input type="checkbox" name="platform" value="YouTube">
+            </label>
+                   
+            <div class="section-divider"></div>
+
+            <label>7. On a typical day, how often do you take breaks from social media to stretch or move around?</label>
+            <select name="performance">
+                <option>Every 15 minutes</option>
+                <option>Every 30 minutes</option>
+                <option>Every hour</option>
+                <option>Rarely</option>
+                <option>Never</option>
+            </select>
+
+            
+
+            <!-- if submit button is pressed it will take you back to onboarding page -->
+            <div class="button-container">
+                <button type="button" onclick="window.location.href='/Onboarding/onboarding.html'">Submit
+                </button>
+              </div>
+              
+            
+        </form>
+    </div>
+</body>
+</html>

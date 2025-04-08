@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Mind Tunes</title>
+    <style>
+      /* Simplified design with video background */
+      /* Green Nature-based theme */
+      :root {
+        --primary-color: #4CAF50;
+        --primary-light: #7BC67E;
+        --primary-dark: #3B8A3E;
+        --accent-color: #8BC34A;
+        --text-dark: #333333;
+        --text-medium: #555555;
+        --text-light: #777777;
+        --bg-color: #F5F9F6;
+        --card-bg: #FFFFFF;
+        --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        --sidebar-width: 250px;
+        --sidebar-width-collapsed: 70px;
+        --transition-speed: 0.3s;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Poppins', sans-serif;
+        color: #fff;
+        overflow-x: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* Video background styling */
+      .video-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+      }
+
+      .video-background video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* Navbar styling */
+      .navbar {
+        background-color: #004d40;
+        padding: 15px 25px;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .navbar-brand {
+        font-size: 26px;
+        font-weight: 600;
+        color: #fff;
+        text-decoration: none;
+      }
+
+     /* Sidebar styles */
+     #sidebar {
+        width: var(--sidebar-width);
+        background-color: var(--card-bg);
+        position: fixed;
+        height: 100vh;
+        z-index: 999;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+        transition: width var(--transition-speed) ease;
+        overflow-x: hidden;
+      }
+
+      #sidebar.collapsed {
+        width: var(--sidebar-width-collapsed);
+      }
+
+      .sidebar-header {
+        padding: 1.5rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+      }
+
+      .sidebar-logo {
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: var(--primary-color);
+        text-decoration: none;
+        transition: color var(--transition-speed) ease;
+      }
+
+      .sidebar-logo:hover {
+        color: var(--primary-dark);
+      }
+
+      #toggle-btn {
+        background: transparent;
+        border: none;
+        color: var(--text-medium);
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: color var(--transition-speed) ease;
+      }
+
+      #toggle-btn:hover {
+        color: var(--primary-color);
+      }
+
+      .sidebar-nav {
+        padding: 1rem 0;
+        list-style: none;
+      }
+
+      .sidebar-item {
+        margin-bottom: 0.5rem;
+      }
+
+      .sidebar-link {
+        display: flex;
+        align-items: center;
+        padding: 0.75rem 1.5rem;
+        color: var(--text-medium);
+        text-decoration: none;
+        transition: all var(--transition-speed) ease;
+        border-radius: 0 8px 8px 0;
+        position: relative;
+      }
+
+      .sidebar-link i {
+        margin-right: 1rem;
+        font-size: 1.1rem;
+      }
+
+      .sidebar-link:hover, 
+      .sidebar-link.active {
+        color: var(--primary-color);
+        background-color: rgba(76, 175, 80, 0.08);
+      }
+
+      .sidebar-dropdown {
+        padding-left: 3rem;
+        display: none;
+        list-style: none;
+      }
+
+      .sidebar-dropdown.active {
+        display: block;
+      }
+
+      
+      .sidebar-dropdown .sidebar-link {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        position: relative; 
+      }
+      .sidebar-dropdown .bullet {
+        position: absolute; /* Position the bullet absolutely */
+        left: -20px; /* Move it further left */
+        font-size: 3 rem;
+        line-height: 1;
+      }
+      
+      .sidebar-dropdown .sidebar-link.active {
+        color: #4CAF50;
+        background-color: rgba(76, 175, 80, 0.1);
+        font-weight: 500;
+      }
+      
+      #homeMenuItem .bi-chevron-down {
+        transition: transform 0.3s;
+        margin-left: auto;
+      }
+      
+      #homeMenuItem.active .bi-chevron-down {
+        transform: rotate(180deg);
+      }
+
+      .sidebar-footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: 1rem;
+        border-top: 1px solid rgba(0,0,0,0.05);
+      }
+
+      /* Content area */
+      .main-content {
+        margin-left: 250px;
+        margin-top: 62px; /* Height of navbar */
+        padding: 30px;
+        min-height: calc(100vh - 62px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Content cards */
+      .content-card {
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 700px;
+        backdrop-filter: blur(5px);
+        color: #333;
+      }
+
+      .card-title {
+        font-size: 22px;
+        font-weight: 600;
+        color: #004d40;
+        margin-bottom: 20px;
+      }
+
+      /* Form elements */
+      .form-control {
+        border: 1px solid rgba(0, 77, 64, 0.3);
+        padding: 12px 15px;
+        border-radius: 10px;
+        font-family: 'Poppins', sans-serif;
+        margin-bottom: 15px;
+        transition: border-color 0.3s ease;
+        background-color: rgba(255, 255, 255, 0.9);
+      }
+
+      .form-control:focus {
+        outline: none;
+        border-color: #00796b;
+        box-shadow: 0 0 0 3px rgba(0, 121, 107, 0.2);
+      }
+      
+
+      .form-label {
+        color: #004d40;
+        font-weight: 500;
+        margin-bottom: 8px;
+        display: block;
+      }
+
+      /* Button styling */
+      .btn {
+        padding: 12px 25px;
+        border-radius: 10px;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .btn-primary {
+        background-color: #00796b;
+        border: none;
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background-color: #004d40;
+        transform: translateY(-2px);
+      }
+
+      .btn-outline {
+        background-color: transparent;
+        border: 1px solid #00796b;
+        color: #00796b;
+      }
+
+      .btn-outline:hover {
+        background-color: #00796b;
+        color: white;
+      }
+
+      /* Booking form */
+      .booking-form {
+        display: none;
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 10px;
+        margin-top: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      .booking-form.active {
+        display: block;
+        animation: fadeIn 0.5s ease-out;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .sidebar {
+          width: 200px;
+          transform: translateX(-100%);
+          transition: transform 0.3s ease;
+        }
+        
+        .sidebar.active {
+          transform: translateX(0);
+        }
+        
+        .main-content {
+          margin-left: 0;
+          padding: 20px;
+        }
+        
+        .content-card {
+          padding: 20px;
+        }
+        
+        .navbar {
+          padding: 12px 15px;
+        }
+        
+        .navbar-brand {
+          font-size: 22px;
+        }
+        
+        .menu-toggle {
+          display: block;
+          cursor: pointer;
+          color: white;
+          font-size: 24px;
+        }
+      }
+      
+      @media (min-width: 769px) {
+        .menu-toggle {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    
+    <div class="wrapper">
+      <!-- Sidebar -->
+      <aside id="sidebar">
+        <div class="sidebar-header">
+          <a href="#" class="sidebar-logo">MindTunes</a>
+          <button id="toggle-btn" type="button">
+          </button>
+        </div>
+        
+        <ul class="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="#" class="sidebar-link" id="homeMenuItem">
+              <i class="bi bi-house-door-fill me-2"></i>
+              <span>Home</span>
+              <i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="homeSubmenu" class="sidebar-dropdown">
+              <li>
+                <a href="/Onboarding/onboarding.html" class="sidebar-link">
+                  <span class="bullet">○</span> Dashboard
+                </a>
+              </li>
+              <li>
+                <a href="/bookingPage/bookingPage.html" class="sidebar-link">
+                  <span class="bullet">○</span> Our Courses
+                </a>
+              </li>
+              <li>
+                <a href="/schedulePage/schedulepage.html" class="sidebar-link active">
+                  <span class="bullet">○</span> Appointment
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </aside>
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Schedule Appointment Card -->
+      <div class="content-card">
+        <h4 class="card-title">Schedule an Appointment</h4>
+        <a href="https://calendly.com/manishkumarshukla2022-vitbhopal/30min?month=2025-04" target="_blank" class="btn btn-primary w-100" id="scheduleBtn">Schedule Appointment</a>
+        
+        <div class="booking-form" id="bookingForm">
+          
+          
+          <div class="mb-3">
+            
+          </div>
+          
+          <div class="mb-3">
+            
+          </div>          
+          <a class="btn btn-primary" id="confirmBtn"></a>
+        </div>
+      </div>
+      
+      <!-- Feedback Card -->
+      <div class="content-card">
+        <h4 class="card-title">Feedback</h4>
+        <p>How was your experience with Mind Tunes</p>
+        
+        <div class="mb-3">
+          <textarea class="form-control" rows="6" placeholder="Describe your experience..."></textarea>
+        </div>
+        
+        <button class="btn btn-outline" id="sendBtn">Send</button>
+      </div>
+    </div>
+
+    <script>
+      // Toggle booking form
+      
+      
+      // Confirm booking
+      document.getElementById('confirmBtn').addEventListener('click', function() {
+        const datePicker = document.getElementById('datePicker');
+        const timePicker = document.getElementById('timePicker');
+        
+        if (datePicker && timePicker && datePicker.value && timePicker.value) {
+          alert('Appointment scheduled for ' + datePicker.value + ' at ' + timePicker.value);
+          
+          // Here you would typically redirect to a confirmation page
+          // window.location.href = '/confirmation.html?date=' + datePicker.value + '&time=' + timePicker.value;
+        } else {
+          alert('Please select both a date and time.');
+        }
+      });
+      
+      // Send feedback
+      document.getElementById('sendBtn').addEventListener('click', function() {
+        alert('Thank you for your feedback!');
+        // Clear the textarea
+        document.querySelector('textarea').value = '';
+      });
+
+      // Toggle Home submenu
+      document.getElementById('homeMenuItem').addEventListener('click', function(e) {
+        e.preventDefault();
+        const homeSubmenu = document.getElementById('homeSubmenu');
+        homeSubmenu.classList.toggle('active');
+        this.classList.toggle('active');
+      });
+      
+      // Show Home submenu by default
+      /*
+      document.addEventListener('DOMContentLoaded', function() {
+        const homeSubmenu = document.getElementById('homeSubmenu');
+        const homeMenuItem = document.getElementById('homeMenuItem');
+        homeSubmenu.classList.add('active');
+        homeMenuItem.classList.add('active');
+      });
+      */
+      
+      // Toggle sidebar collapse
+      document.getElementById('toggle-btn').addEventListener('click', function() {
+        document.getElementById('sidebar').classList.toggle('collapsed');
+      });
+      
+      // Mobile menu toggle
+      if (document.getElementById('menuToggle')) {
+        document.getElementById('menuToggle').addEventListener('click', function() {
+          const sidebar = document.getElementById('sidebar');
+          sidebar.classList.toggle('active');
+        });
+      }
+    </script>
+  </body>
+</html>

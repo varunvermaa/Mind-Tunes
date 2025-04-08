@@ -1,1 +1,1 @@
-# Mind-Tunes
+# MindTunes

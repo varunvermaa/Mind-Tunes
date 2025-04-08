@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Video background outside everything -->
+    <div class="video-background">
+        <video autoplay muted loop playsinline>
+            <source src="/vid/backgroundd.mp4" type="video/mp4">
+        </video>
+    </div>
+    
+    <!-- Overlay for better text contrast -->
+    <div class="video-overlay"></div>
+
+    <div class="container">
+        <h2>Payment Details</h2>
+        <div class="content">
+            <form id="paymentForm" class="form-section">
+                <label for="name">Name</label>
+                <input type="text" id="name" placeholder="Please Mention Your Full Name" required>
+
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" placeholder="Please Mention Your Mobile Number" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Enter Your Email" required>
+
+                <label for="course">Course Interested In</label>
+                <input type="text" id="course" readonly required>
+
+                <label for="amount">Amount</label>
+                <input type="number" id="amount" readonly required>
+
+
+                <label for="purpose">Transaction id</label>
+                <input type="text" id="purpose" placeholder="Enter your transaction id" required>
+
+                <button type="submit">Submit ₹<span id="payAmount">0.00</span></button>
+            </form>
+
+            <div class="qr-container">
+                <p>Scan QR Code to Pay:</p>
+                <img src="qrCode.png" alt="QR Code">
+            </div>
+        </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+    <!-- Firebase App (core SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+
+    <!-- Firestore -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>

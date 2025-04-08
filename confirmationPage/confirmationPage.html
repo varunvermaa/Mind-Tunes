@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <title>Mind Tunes | Payment Confirmation</title>
+    
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        
+        #bg-video {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -1;
+        }
+        
+        .page-content {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .navbar {
+            background-color: #2E8B57;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 600;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .nav-link {
+            color: white !important;
+        }
+        
+        .container-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1rem;
+        }
+        
+        .main-container {
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        h2 {
+            font-weight: 600;
+            color: #2E8B57;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .appointment-card {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px dashed #eee;
+            margin: 0 auto;
+            max-width: 500px;
+        }
+        
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+        
+        .detail-label {
+            font-weight: 500;
+            color: #444;
+            text-align: left;
+        }
+        
+        .detail-value {
+            text-align: right;
+            color: #555;
+        }
+        
+        .total-row {
+            font-weight: 600;
+            color: #2E8B57;
+            padding-top: 1rem;
+            margin-top: 1rem;
+            border-top: 1px solid #ddd;
+        }
+        
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+            gap: 1rem;
+        }
+        
+        .btn-pay {
+            background-color: #2E8B57;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.5rem 2rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-pay:hover {
+            background-color: #3CB371;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(46, 139, 87, 0.3);
+        }
+        
+        .btn-pay:active {
+            transform: translateY(0);
+        }
+        
+        .btn-cancel {
+            background-color: white;
+            color: #DC3545;
+            border: 1px solid #DC3545;
+            border-radius: 8px;
+            padding: 0.5rem 2rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-cancel:hover {
+            background-color: #DC3545;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+        }
+        
+        .btn-cancel:active {
+            transform: translateY(0);
+        }
+        
+        .qr-code {
+            display: none;
+            text-align: center;
+            animation: fadeInUp 0.5s ease-in-out forwards;
+            margin: 1.5rem auto 0;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <video autoplay muted loop id="bg-video">
+        <source src="/vid/bookingprocesspage.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    
+    <div class="page-content">
+        <nav class="navbar navbar-expand-lg px-4 py-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">MindTunes</a>
+                <div class="navbar-collapse collapse">
+    
+              </div>
+            </div>
+        </nav>
+        
+        <div class="container-wrapper">
+            <div class="main-container">
+                <h2>Appointment Confirmation</h2>
+                
+                <div class="appointment-card">
+                    <div class="detail-row">
+                        <div class="detail-label">Appointment Link:</div>
+                        <div class="detail-value"></div>
+                    </div>
+                    
+                    <div class="detail-row">
+                        <div class="detail-label">Session Start:</div>
+                        <div class="detail-value"></div>
+                    </div>
+                    
+                    <div class="detail-row">
+                        <div class="detail-label">Email:</div>
+                        <div class="detail-value"></div>
+                    </div>
+                    
+                    <div class="detail-row">
+                        <div class="detail-label">Contact:</div>
+                        <div class="detail-value"></div>
+                    </div>
+                    
+                    <div class="detail-row total-row">
+                        <div class="detail-label">Total:</div>
+                        <div class="detail-value"></div>
+                    </div>
+                </div>
+                
+                <div class="qr-code" id="qrCodeContainer">
+                    <img src="/Payment/qrCode.png" alt="QR Code for Payment" width="150">
+                    <p class="mt-3">Scan to complete payment</p>
+                </div>
+                
+                <div class="btn-container">
+                    <button class="btn btn-pay" onclick="payNow()">Pay Now</button>
+                    <button class="btn btn-cancel">Cancel Booking</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function payNow() {
+            document.getElementById('qrCodeContainer').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
